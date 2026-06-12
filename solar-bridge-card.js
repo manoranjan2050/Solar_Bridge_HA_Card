@@ -2,6 +2,7 @@ import { LitElement, html, css } from "https://unpkg.com/lit@3.2.1/index.js?modu
 
 const DEFAULT_CONFIG = {
   title: "Solar Bridge",
+  card_style: "power-flow",
   solar_power_entity: "",
   battery_soc_entity: "",
   battery_power_entity: "",
@@ -22,6 +23,7 @@ class SolarBridgeCard extends LitElement {
     return {
       type: "custom:solar-bridge-card",
       title: "Solar Bridge",
+      card_style: "power-flow",
       solar_power_entity: "sensor.solar_power",
       battery_soc_entity: "sensor.battery_soc",
       battery_power_entity: "sensor.battery_power",
@@ -126,10 +128,13 @@ class SolarBridgeCard extends LitElement {
     const soc = Math.max(0, Math.min(100, this._number(this.config.battery_soc_entity)));
     const gridLabel = grid >= 0 ? "Grid Import" : "Grid Export";
     const batteryLabel = battery >= 0 ? "Battery Charge" : "Battery Discharge";
+    const cardStyle = ["power-flow", "dashboard", "compact"].includes(this.config.card_style)
+      ? this.config.card_style
+      : "power-flow";
 
     return html`
       <ha-card>
-        <div class="card-shell">
+        <div class="card-shell ${cardStyle}">
           <header>
             <div>
               <p class="eyebrow">Energy Flow</p>
@@ -242,6 +247,10 @@ class SolarBridgeCard extends LitElement {
       padding: 18px;
     }
 
+    .card-shell.compact {
+      padding: 14px;
+    }
+
     header {
       display: flex;
       align-items: center;
@@ -306,6 +315,15 @@ class SolarBridgeCard extends LitElement {
       width: 100%;
       aspect-ratio: 1.68;
       min-height: 210px;
+    }
+
+    .dashboard .flow-board {
+      min-height: 170px;
+    }
+
+    .compact .flow-board {
+      min-height: 132px;
+      margin-top: -4px;
     }
 
     svg {
@@ -400,6 +418,19 @@ class SolarBridgeCard extends LitElement {
       margin-top: 8px;
     }
 
+    .power-flow .metrics {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .dashboard .metrics {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .compact .metrics {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 6px;
+    }
+
     .metric {
       display: flex;
       align-items: center;
@@ -415,6 +446,15 @@ class SolarBridgeCard extends LitElement {
       cursor: pointer;
     }
 
+    .compact .metric {
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+      min-height: 68px;
+      padding: 8px 6px;
+      text-align: center;
+    }
+
     .metric-icon {
       display: grid;
       place-items: center;
@@ -426,6 +466,13 @@ class SolarBridgeCard extends LitElement {
       font-weight: 800;
       background: linear-gradient(135deg, #ffe66d, #35d07f);
       border-radius: 50%;
+    }
+
+    .compact .metric-icon {
+      flex-basis: 28px;
+      width: 28px;
+      height: 28px;
+      font-size: 12px;
     }
 
     .metric-copy {
@@ -442,6 +489,17 @@ class SolarBridgeCard extends LitElement {
       line-height: 1.2;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .compact .metric-label {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .compact .metric-value {
+      font-size: 12px;
     }
 
     @keyframes flow {
@@ -469,6 +527,10 @@ class SolarBridgeCard extends LitElement {
 
       .metrics {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .compact .metrics {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .metric {
