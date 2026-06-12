@@ -1,0 +1,22 @@
+{
+  "name": "solar-bridge-card",
+  "version": "1.0.0",
+  "description": "A modern animated Solar Bridge custom card for Home Assistant.",
+  "main": "solar-bridge-card.js",
+  "scripts": {
+    "build": "echo \"No build step required. Use solar-bridge-card.js directly.\"",
+    "release": "echo \"Create a GitHub release and attach solar-bridge-card.js for HACS users.\""
+  },
+  "keywords": [
+    "home-assistant",
+    "home-assistant-custom-card",
+    "hacs",
+    "lit",
+    "solar",
+    "battery",
+    "energy"
+  ],
+  "author": "MANORANJAN",
+  "license": "MIT",
+  "devDependencies": {}
+}
