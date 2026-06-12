@@ -1,6 +1,6 @@
 {
   "name": "solar-bridge-card",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A modern animated Solar Bridge custom card for Home Assistant.",
   "main": "solar-bridge-card.js",
   "scripts": {

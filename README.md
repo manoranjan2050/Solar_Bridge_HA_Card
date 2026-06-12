@@ -4,9 +4,13 @@ Modern animated solar energy flow card for Home Assistant.
 
 Built for dashboards that use the Solar Bridge Flin/Fution/JKBMS project, but configurable for any Home Assistant entities.
 
+![HACS Custom](https://img.shields.io/badge/HACS-Custom-orange.svg)
+![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Dashboard%20Card-blue.svg)
+
 ## Features
 
 - Animated SVG solar power flow
+- Card style selector support
 - Solar power entity
 - Battery SOC entity
 - Battery power entity
@@ -30,8 +34,22 @@ Built for dashboards that use the Solar Bridge Flin/Fution/JKBMS project, but co
    ```
 
 5. Select category **Dashboard**.
-6. Install **Solar Bridge Card**.
-7. Refresh your browser.
+6. Click **Add**.
+7. Search for **Solar Bridge Card** in HACS Frontend.
+8. Open it and click **Download**.
+9. Refresh your browser.
+
+After adding the custom repository, the card appears in HACS as:
+
+```text
+Solar Bridge Card
+```
+
+Category:
+
+```text
+Dashboard
+```
 
 ## Manual Installation
 
@@ -55,6 +73,7 @@ Built for dashboards that use the Solar Bridge Flin/Fution/JKBMS project, but co
 ```yaml
 type: custom:solar-bridge-card
 title: Solar Bridge
+card_style: power-flow
 solar_power_entity: sensor.solar_power
 battery_soc_entity: sensor.battery_soc
 battery_power_entity: sensor.battery_power
@@ -69,6 +88,7 @@ today_generation_entity: sensor.today_generation
 | --- | --- | --- |
 | `type` | Yes | Must be `custom:solar-bridge-card` |
 | `title` | No | Card title. Defaults to `Solar Bridge` |
+| `card_style` | No | Card layout: `power-flow`, `dashboard`, or `compact` |
 | `solar_power_entity` | Yes | Current solar production power sensor |
 | `battery_soc_entity` | Yes | Battery state of charge sensor |
 | `battery_power_entity` | Yes | Battery charge/discharge power sensor |
@@ -91,6 +111,16 @@ No build step is required. The card imports Lit directly as an ES module and can
 npm install
 npm run build
 ```
+
+## HACS Repository Requirements
+
+This repository is ready for HACS custom repository installation because it includes:
+
+- `hacs.json`
+- `solar-bridge-card.js` in the repository root
+- `content_in_root: true`
+- `filename: solar-bridge-card.js`
+- GitHub releases/tags for installable versions
 
 ## GitHub Repository
 

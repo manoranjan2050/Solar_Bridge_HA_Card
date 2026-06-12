@@ -11,7 +11,7 @@ const DEFAULT_CONFIG = {
   today_generation_entity: "",
 };
 
-const CARD_VERSION = "1.0.0";
+const CARD_VERSION = "1.1.0";
 
 class SolarBridgeCard extends LitElement {
   static properties = {
